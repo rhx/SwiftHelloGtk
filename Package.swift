@@ -1,8 +1,8 @@
 import PackageDescription
 
 let package = Package(
-    name: "SwiftGtkApp",
+    name: "HelloGtk",
     dependencies: [
-        .Package(url: "https://github.com/rhx/SwiftGtk.git", Version("3.18.0-2.46")!)
+        .Package(url: "https://github.com/rhx/SwiftGtk.git", majorVersion: 3)
     ]
 )

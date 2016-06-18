@@ -6,6 +6,6 @@
 . ./config.sh
 ./package.sh fetch
 for gen in Packages/*/gir-to-swift.sh ; do
-	echo "Generating Swift wrapper for `dirname $gen`"
+	echo "Generate Swift Wrapper for `dirname $gen | cut -d/ -f2`"
 	( cd `dirname $gen` && ./`basename $gen` "$@" )
 done
