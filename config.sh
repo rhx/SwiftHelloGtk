@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 ver=3.0
-Mod=GtkApp
+Mod=HelloGtk
 Module=${Mod}-$ver
 mod=`echo "${Mod}" | tr '[:upper:]' '[:lower:]'`+
 module="${mod}-${ver}"
