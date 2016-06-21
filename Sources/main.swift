@@ -1,5 +1,7 @@
 import Gtk
 
+let app = Application()!
+
 let status = app.run {
     var window = ApplicationWindowRef(application: app)
     window.title = "Hello, world"
