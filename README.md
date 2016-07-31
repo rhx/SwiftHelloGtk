@@ -49,14 +49,14 @@ The Swift wrappers have been tested with glib-2.46 and 2.48, and gdk/gtk 3.18 an
 On Ubuntu 16.04, you can use the gtk that comes with the distribution.  Just install with the `apt` package manager:
 
 	sudo apt update
-	sudo apt install libgtk-3-dev gir1.2-gtk-3.0 gir1.2-gtksource-3.0 libgirepository1.0-dev
+	sudo apt install libgtk-3-dev gir1.2-gtksource-3.0 gobject-introspection libgirepository1.0-dev
 
 If you prefer a newer version of gtk, you can also install it from the GNOME 3 Staging PPA (see https://launchpad.net/~gnome3-team/+archive/ubuntu/gnome3-staging), but be aware that this can be a bit dangerous (as this removes packages that can be vital, particularly if you use a GNOME-based desktop), so only do this if you know what you are doing:
 
 	sudo add-apt-repository ppa:gnome3-team/gnome3-staging
 	sudo apt update
 	sudo apt dist-upgrade
-	sudo apt install libgtk-3-dev gir1.2-gtk-3.0 gir1.2-gtksource-3.0 libgirepository1.0-dev
+	sudo apt install libgtk-3-dev gir1.2-gtksource-3.0 gobject-introspection libgirepository1.0-dev
 
 #### macOS
 
