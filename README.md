@@ -21,7 +21,7 @@ On macOS, you can build the project using Xcode instead.  To do this, you need t
 	./xcodegen.sh
 	open HelloGtk.xcodeproj
 
-After that, use the (usual) Build and Run buttons to build/run your project.
+After that, select the executable target (not the Bundle/Framework target with the same name as the executable) and use the (usual) Build and Run buttons to build/run your project.
 
 
 ## Prerequisites
