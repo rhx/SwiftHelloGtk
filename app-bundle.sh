@@ -11,9 +11,14 @@ APP_CONTENTS="${APP_DIR}/Contents"
 MACOS_BIN="${APP_CONTENTS}/MacOS"
 FRAMEWORKS_FOLDER_PATH="${APP_CONTENTS}/Frameworks"
 mkdir -p "${MACOS_BIN}"
-cp -p "${BUILD_BIN}/${Mod}" "${MACOS_BIN}"
 rm -rf "${APP_CONTENTS}/Resources"
 cp -pR "${RESOURCES_DIR}" "${APP_CONTENTS}"
+if [ -e "${MACOS_BIN}/${Mod}" -a \
+      !	"${BUILD_BIN}/${Mod}" -nt "${MACOS_BIN}/${Mod}" ]; then
+	echo `echo "${APP_DIR}" | cut -c${wc}- | sed 's|^[^/]*/||'`/Contents/MacOS/${Mod} is up to date.
+	exit 0
+fi
+cp -p "${BUILD_BIN}/${Mod}" "${MACOS_BIN}"
 echo 'APPL????' > ${APP_CONTENTS}/PkgInfo
 sed < "${RESOURCES_DIR}/Info.plist" > "${APP_CONTENTS}/Info.plist"	\
 	-e 's/\$.EXECUTABLE_NAME./'"${EXECUTABLE_NAME}.sh/g"	\
