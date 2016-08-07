@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Wrapper around `swift build' that uses pkg-config in config.sh
 # to determine compiler and linker flags
