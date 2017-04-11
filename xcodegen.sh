@@ -8,6 +8,7 @@
 gtk=`echo Packages/Gtk-3*/Sources/Gtk-3.0.swift`
 [ -e $gtk ] || ./generate-wrapper.sh
 ./package.sh generate-xcodeproj "$@"
+[ ! -e ${Mod}.xcodeproj/Configs ] ||					   \
 ( cd ${Mod}.xcodeproj/Configs						&& \
   mv Project.xcconfig Project.xcconfig.in				&& \
   echo 'SWIFT_VERSION = 3.0' >> Project.xcconfig.in			&& \
@@ -19,5 +20,5 @@ gtk=`echo Packages/Gtk-3*/Sources/Gtk-3.0.swift`
 ( cd ${Mod}.xcodeproj							&& \
   mv project.pbxproj project.pbxproj.in					&& \
   sed < project.pbxproj.in > project.pbxproj				   \
-    -e "s/\(HEADER_SEARCH_PATHS[^A-Za-z][^']*'[^']*\)'/\\1 \\\$(inherited)'/"
+    -e "s|\(HEADER_SEARCH_PATHS = .\)$|\\1 \"`echo $CCFLAGS | sed -e 's/-Xcc  *-I */ /g' -e 's/^ *//' -e 's/ *$//'`\",|"
 )
