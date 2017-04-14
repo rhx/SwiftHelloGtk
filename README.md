@@ -28,21 +28,21 @@ After that, select the executable target (not the Bundle/Framework target with t
 
 ### Swift
 
-To build, you need Swift 3.0 (download from https://swift.org/download/ -- if you are using macOS, make sure you have the command line tools installed as well).  Test that your compiler works using `swift --version`, which should give you something like
+To build, you need Swift 3.1 (download from https://swift.org/download/ -- if you are using macOS, make sure you have the command line tools installed as well).  Test that your compiler works using `swift --version`, which should give you something like
 
 	$ swift --version
-	Apple Swift version 3.0 (swiftlang-800.0.46.2 clang-800.0.38)
+	Apple Swift version 3.1 (swiftlang-802.0.51 clang-802.0.41)
 	Target: x86_64-apple-macosx10.9
 
 on macOS, or on Linux you should get something like:
 
 	$ swift --version
-	Swift version 3.0 (swift-3.0-PREVIEW-4)
+	Swift version 3.1 (swift-3.1-RELEASE)
 	Target: x86_64-unknown-linux-gnu
 
 ### Gtk 3.18 or higher
 
-The Swift wrappers have been tested with glib-2.46 and 2.48, and gdk/gtk 3.18 and 3.20.  They should work with higher versions, but YMMV.  Also make sure you have `gobject-introspection` and its `.gir` files installed.
+The Swift wrappers have been tested with glib-2.46, 2.48 and 2.52, and gdk/gtk 3.18, 3.20, and 3.22.  They should work with higher versions, but YMMV.  Also make sure you have `gobject-introspection` and its `.gir` files installed.
 
 #### Linux
 
@@ -64,7 +64,6 @@ On macOS, you can install gtk using HomeBrew (for setup instructions, see http:/
 
 	brew update
 	brew install gtk+3
-
 
 
 ## Troubleshooting

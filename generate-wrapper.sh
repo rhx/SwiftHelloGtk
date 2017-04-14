@@ -26,4 +26,3 @@ else
 	( cd `dirname $gen` && ./`basename $gen` "$@" )
   done
 fi
-. ./gir-to-swift.sh "$@"
