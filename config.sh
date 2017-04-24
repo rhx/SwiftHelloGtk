@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 ver=3.0
-Mod=HelloGtk
+Mod=`grep name: Package.swift | cut -d'"' -f2`
 Module=${Mod}-$ver
 mod=`echo "${Mod}" | tr '[:upper:]' '[:lower:]'`+
 module="${mod}-${ver}"
