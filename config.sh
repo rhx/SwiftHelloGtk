@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 ver=3.0
-Mod=`grep name: Package.swift | cut -d'"' -f2`
+Mod=`grep name: Package.swift | head -n1 | cut -d'"' -f2`
 Module=${Mod}-$ver
 mod=`echo "${Mod}" | tr '[:upper:]' '[:lower:]'`+
 module="${mod}-${ver}"

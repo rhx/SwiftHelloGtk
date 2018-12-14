@@ -1,9 +1,13 @@
+// swift-tools-version:4.0
+
 import PackageDescription
 
 let package = Package(
     name: "HelloGtk",
     dependencies: [
-        .Package(url: "https://github.com/rhx/SwiftGtk.git", majorVersion: 3)
+        .package(url: "https://github.com/rhx/SwiftGtk.git", .branch("master")),
     ],
-    swiftLanguageVersions: [3, 4]
+    targets: [
+        .target(name: "HelloGtk", dependencies: ["Gtk"]),
+    ]
 )
