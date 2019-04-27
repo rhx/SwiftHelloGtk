@@ -6,7 +6,7 @@
 # On macOS (Darwin), this script uses gtk-mac-bundler to create an app
 #
 . ./config.sh
-gtk=`echo .build/checkouts/SwiftGtk.*/Sources/Gtk/Gtk-3.0.swift`
+gtk=`echo .build/checkouts/SwiftGtk*/Sources/Gtk/Gtk-3.0.swift`
 [ -e $gtk ] || ./generate-wrapper.sh
 swift build $CCFLAGS $LINKFLAGS "$@"
 if [ `uname` = "Darwin" ]; then
