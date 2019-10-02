@@ -3,7 +3,9 @@ import Gtk
 let status = Application.run { app in
     let window = ApplicationWindowRef(application: app)
     window.title = "Hello, world"
-    window.setDefaultSize(width: 640, height: 480)
+    window.setDefaultSize(width: 320, height: 240)
+    let label = Label(str: "Hello, SwiftGtk")
+    window.add(widget: label)
     window.showAll()
 }
 
