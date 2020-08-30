@@ -1,6 +1,6 @@
 import Gtk
 
-let status = Application.run { app in
+let status = Application.run(startupHandler: nil) { app in
     let window = ApplicationWindowRef(application: app)
     window.title = "Hello, world"
     window.setDefaultSize(width: 320, height: 240)

@@ -24,21 +24,40 @@ On macOS, you can build the project using Xcode instead.  To do this, you need t
 
 After that, select the executable target (not the Bundle/Framework target with the same name as the executable) and use the (usual) Build and Run buttons to build/run your project.
 
+## What is new?
+
+Version 11 introduces a new type system into `gir2swift`,
+to ensure it has a representation of the underlying types.
+This is necessary for Swift 5.3 onwards, which requires more stringent casts.
+As a consequence, accessors can accept and return idiomatic Swift rather than
+underlying types or pointers.
+This means that a lot of the changes will be source-breaking for code that
+was compiled against libraries built with earlier versions of `gir2swift`.
+
+### Notable changes
+
+ * Requires Swift 5.2 or later
+ * Wrapper code is now `@inlinable` to enable the compiler to optimise away most of the wrappers
+ * Parameters and return types use more idiomatic Swift (e.g. `Ref` wrappers instead of pointers, `Int` instead of `gint`, etc.)
+ * Functions that take or return records now are templated instead of using the type-erased Protocol
+ * `ErrorType` has been renamed `GLibError` to ensure it neither clashes with `Swift.Error` nor the `GLib.ErrorType`  scanner enum
+ * Parameters or return types for records/classes now use the corresponding, lightweight Swift `Ref` wrapper instead of the underlying pointer
+
 
 ## Prerequisites
 
 ### Swift
 
-Building should work with at least Swift 4 (Swift 5 should work as well). You can download Swift from https://swift.org/download/ -- if you are using macOS, make sure you have the command line tools installed as well (install them using `xcode-select --install`).  Test that your compiler works using `swift --version`, which should give you something like
+Building should work with at least Swift 5.2 (Swift 5.3+ should work as well). You can download Swift from https://swift.org/download/ -- if you are using macOS, make sure you have the command line tools installed as well (install them using `xcode-select --install`).  Test that your compiler works using `swift --version`, which should give you something like
 
 	$ swift --version
-	Apple Swift version 5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)
+	Apple Swift version 5.2.4 (swiftlang-1100.0.282.1 clang-1100.0.33.15)
 	Target: x86_64-apple-darwin19.4.0
 
 on macOS, or on Linux you should get something like:
 
 	$ swift --version
-	Swift version 5.1.5 (swift-5.1.5-RELEASE)
+	Swift version 5.2.5 (swift-5.2.5-RELEASE)
 	Target: x86_64-unknown-linux-gnu
 
 ### Gtk 3.18 or higher
