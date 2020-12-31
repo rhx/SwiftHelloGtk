@@ -26,6 +26,12 @@ After that, select the executable target (not the Bundle/Framework target with t
 
 ## What is new?
 
+### Support for gtk 4.x
+
+There now is a `gtk4` branch supporting the latest version of gtk.
+
+### Other notable changes
+
 Version 11 introduces a new type system into `gir2swift`,
 to ensure it has a representation of the underlying types.
 This is necessary for Swift 5.3 onwards, which requires more stringent casts.
@@ -34,9 +40,7 @@ underlying types or pointers.
 This means that a lot of the changes will be source-breaking for code that
 was compiled against libraries built with earlier versions of `gir2swift`.
 
-### Notable changes
-
- * Requires Swift 5.2 or later
+ * Requires Swift 5.2 or later (Swift 5.3 is required for the `gtk4` branch)
  * Wrapper code is now `@inlinable` to enable the compiler to optimise away most of the wrappers
  * Parameters and return types use more idiomatic Swift (e.g. `Ref` wrappers instead of pointers, `Int` instead of `gint`, etc.)
  * Functions that take or return records now are templated instead of using the type-erased Protocol
@@ -51,18 +55,18 @@ was compiled against libraries built with earlier versions of `gir2swift`.
 Building should work with at least Swift 5.2 (Swift 5.3+ should work as well). You can download Swift from https://swift.org/download/ -- if you are using macOS, make sure you have the command line tools installed as well (install them using `xcode-select --install`).  Test that your compiler works using `swift --version`, which should give you something like
 
 	$ swift --version
-	Apple Swift version 5.2.4 (swiftlang-1100.0.282.1 clang-1100.0.33.15)
-	Target: x86_64-apple-darwin19.4.0
+	Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
+    Target: x86_64-apple-darwin20.3.0
 
 on macOS, or on Linux you should get something like:
 
 	$ swift --version
-	Swift version 5.2.5 (swift-5.2.5-RELEASE)
+	Swift version 5.3.2 (swift-5.3.2-RELEASE)
 	Target: x86_64-unknown-linux-gnu
 
-### Gtk 3.18 or higher
+### Gtk 3.22 or higher
 
-The Swift wrappers have been tested with glib-2.46, 2.48, 2.52, 2.56, 2.58, 2.60, 2.62, and 2.64, and gdk/gtk 3.18, 3.20, 3.22, and 3.24.  They should work with higher versions, but YMMV.  Also make sure you have `gobject-introspection` and its `.gir` files installed.
+The Swift wrappers have been tested with glib-2.56, 2.58, 2.60, 2.62, and 2.64, and gdk/gtk 3.22, 3.24, and 4.0 on the `gtk4` branch.  They should work with higher versions, but YMMV.  Also make sure you have `gobject-introspection` and its `.gir` files installed.
 
 #### Linux
 
