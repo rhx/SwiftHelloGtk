@@ -52,7 +52,7 @@ was compiled against libraries built with earlier versions of `gir2swift`.
 
 ### Swift
 
-Building should work with at least Swift 5.2 (Swift 5.3+ should work as well). You can download Swift from https://swift.org/download/ -- if you are using macOS, make sure you have the command line tools installed as well (install them using `xcode-select --install`).  Test that your compiler works using `swift --version`, which should give you something like
+Building should work with at least Swift 5.2 (Swift 5.3 is required for `gtk4`). You can download Swift from https://swift.org/download/ -- if you are using macOS, make sure you have the command line tools installed as well (install them using `xcode-select --install`).  Test that your compiler works using `swift --version`, which should give you something like
 
 	$ swift --version
 	Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
