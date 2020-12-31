@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
     name: "HelloGtk",
     dependencies: [
-        .package(name: "Gtk", url: "https://github.com/rhx/SwiftGtk.git", .branch("master")),
+        .package(name: "Gtk", url: "https://github.com/rhx/SwiftGtk.git", .branch("main")),
     ],
     targets: [
         .target(name: "HelloGtk", dependencies: ["Gtk"]),
