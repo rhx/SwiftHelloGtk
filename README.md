@@ -1,23 +1,41 @@
 # SwiftHelloGtk
+
 A simple 'hello-world' app using SwiftGtk
 
-## Building
+## Building and Running
+
 Make sure you have all the prerequisites installed (see below).  After that, you can simply clone this repository and build the command line executable (be patient, this will download all the required dependencies and take a while to compile) using
 
 	git clone https://github.com/rhx/SwiftHelloGtk.git
 	cd SwiftHelloGtk
-	./build.sh
+    ./run-gir2swift.sh
+    swift run
 	
-After that, you can run the program using
+This will run the application.  A simple, empty 'Hello World' window should appear.  To exit the program, click the close button or press Control-C in the Terminal window.
+Please note that on macOS, due to a bug currently in the Swift Package Manager,
+you need to pass in the build flags manually, i.e. instead of `swift build` and `swift test` you can run
 
+    swift run `./run-gir2swift.sh flags -noUpdate`
+
+Alternatively, you can just build the program and run manually using
+
+    swift build
 	.build/debug/HelloGtk
 
-A simple, empty 'Hello World' window should appear.  To exit the program, click the close button or press Control-C in the Terminal window.
+Again, on macOS use
+
+    swift build `./run-gir2swift.sh flags -noUpdate`
+
+to ensure the correct compiler and linker flags are being passed in.
+On macOS you can also create an App bundle that you can move to your `/Applications` folder and double-click by running the following script:
+
+	./app-bundle.sh
+
+This will create a `HelloGtk.app` inside the `.build/app/` folder.
 
 ### Xcode
 
 On macOS, you can build the project using Xcode instead.  To do this, you need to create an Xcode project first, then open the project in the Xcode IDE:
-
 
 	./xcodegen.sh
 	open HelloGtk.xcodeproj
@@ -29,6 +47,8 @@ After that, select the executable target (not the Bundle/Framework target with t
 ### Support for gtk 4.x
 
 There now is a `gtk4` branch supporting the latest version of gtk.
+
+The current version introduces a new build system and signal generation code contributed by Mikoláš Stuchlík (see the **Building and Running** Section above).
 
 ### Other notable changes
 
@@ -66,7 +86,7 @@ on macOS, or on Linux you should get something like:
 
 ### Gtk 3.22 or higher
 
-The Swift wrappers have been tested with glib-2.56, 2.58, 2.60, 2.62, and 2.64, and gdk/gtk 3.22, 3.24, and 4.0 on the `gtk4` branch.  They should work with higher versions, but YMMV.  Also make sure you have `gobject-introspection` and its `.gir` files installed.
+The Swift wrappers have been tested with glib-2.56, 2.58, 2.60, 2.62, 2.64, and 2.66, and gdk/gtk 3.22, 3.24, and 4.0 on the `gtk4` branch.  They should work with higher versions, but YMMV.  Also make sure you have `gobject-introspection` and its `.gir` files installed.
 
 #### Linux
 
@@ -97,11 +117,12 @@ On macOS, you can install gtk using HomeBrew (for setup instructions, see http:/
 	brew update
 	brew install gtk+3 glib glib-networking gobject-introspection pkg-config
 
-
 ## Troubleshooting
+
 Here are some common errors you might encounter and how to fix them.
 
 ### Old Swift toolchain or Xcode
+
 If you get an error such as
 
 	$ ./build.sh 
@@ -114,3 +135,9 @@ this probably means that your Swift toolchain is too old.  Make sure the latest 
 	sudo xcode-select -s /Applications/Xcode.app
 	xcode-select --install
 
+### Known Issues
+
+ * The new build system does not support directory paths with spaces (e.g. the `My Drive` directory used by Google Drive File Stream).
+ * BUILD_DIR is not supported in the new build system.
+ 
+As a workaround, you can use the old build scripts, e.g. `./build.sh` (instead of `run-gir2swift.sh` and `swift build`) to build a package.
