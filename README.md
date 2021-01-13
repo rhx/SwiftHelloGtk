@@ -3,6 +3,14 @@
 A simple 'hello-world' app using SwiftGtk
 
 ## Building and Running
+=======
+![macOS 11 build](https://github.com/rhx/SwiftHelloGtk/workflows/macOS%2011/badge.svg)
+![macOS 10.15 build](https://github.com/rhx/SwiftHelloGtk/workflows/macOS%2010.15/badge.svg)
+![macOS gtk4 build](https://github.com/rhx/SwiftHelloGtk/workflows/macOS%20gtk4/badge.svg)
+![Ubuntu 20.04 build](https://github.com/rhx/SwiftHelloGtk/workflows/Ubuntu%2020.04/badge.svg)
+![Ubuntu 18.04 build](https://github.com/rhx/SwiftHelloGtk/workflows/Ubuntu%2018.04/badge.svg)
+
+## Building
 
 Make sure you have all the prerequisites installed (see below).  After that, you can simply clone this repository and build the command line executable (be patient, this will download all the required dependencies and take a while to compile) using
 
@@ -20,6 +28,18 @@ On macOS you can also create an App bundle that you can move to your `/Applicati
 	./app-bundle.sh
 
 This will create a `HelloGtk.app` inside the `.build/app/` folder.
+
+### macOS
+
+Please note that on macOS, due to a bug currently in the Swift Package Manager,
+you need to pass in the build flags manually, i.e. instead of `swift build` and `swift run` you can run
+
+    swift build `./run-gir2swift.sh flags -noUpdate`
+    swift run   `./run-gir2swift.sh flags -noUpdate`
+
+Under macOS, you can also create an Application bundle that you can copy to the `/Applications` folder by using
+
+    ./app-bundle.sh
 
 ### Xcode
 
@@ -118,3 +138,13 @@ this probably means that your Swift toolchain is too old.  Make sure the latest 
 
 	sudo xcode-select -s /Applications/Xcode.app
 	xcode-select --install
+
+### Known Issues
+
+ * When building, a lot of warnings appear.  This is largely an issue with automatic `RawRepresentable` conformance in the Swift Standard library.  As a workaround, you can turn this off by passing the `-Xswiftc -suppresswarnings` parameter when building.
+ 
+ * The current build system does not support directory paths with spaces (e.g. the `My Drive` directory used by Google Drive File Stream).
+ * BUILD_DIR is not supported in the current build system.
+ 
+As a workaround, you can use the old build scripts, e.g. `./build.sh` (instead of `run-gir2swift.sh` and `swift build`) to build a package.
+>>>>>>> a056c93 (Add new build system)
