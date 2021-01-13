@@ -15,14 +15,14 @@ if [ -z "$BUILD_DIR" ]; then
   if `pwd -P | grep -q Dropbox` ; then
     export BUILD_DIR="/tmp/.build-$Module"
   else
-    export BUILD_DIR=`pwd`/.build
+    export BUILD_DIR="$PWD/.build"
   fi
 fi
 BUILD_BIN=${BUILD_DIR}/debug
 BUILT_PRODUCTS_DIR=${BUILD_DIR}/app
 export PACKAGES=.build/checkouts
 [ -e $PACKAGES ] || export PACKAGES=Packages
-export PATH="${GIR2SWIFT_PATH}:${BUILD_DIR}/gir2swift/.build/release:${BUILD_DIR}/gir2swift/.build/debug:${PATH}"
+export PATH="${GIR2SWIFT_PATH}:${BUILD_DIR}/gir2swift/.build/release:${BUILD_DIR}/gir2swift/.build/debug:${BUILD_DIR}/checkouts/gir2swift/.build/release:${BUILD_DIR}/checkouts/gir2swift/.build/debug:${PATH}:${PATH}"
 export PKG_CONFIG_PATH=/usr/local/opt/libffi/lib/pkgconfig:${PKG_CONFIG_PATH}
 GOBJECT_LIBDIR=`pkg-config --libs-only-L gobject-introspection-1.0 2>/dev/null | tr ' ' '\n' | grep gobject-introspection | tail -n1 | cut -c3-`
 LINKFLAGS=`pkg-config --libs gtk+-$ver gdk-$ver pangocairo pangoft2 pango gobject-2.0 gio-unix-2.0 glib-2.0 | sed -e 's/ *--export-dynamic */ /g' -e 's/ *-Wl, */ /g' -e 's/,/ -Xlinker /g' -e 's/-pthread/-lpthread/g' -e 's/  */ /g' -e 's/^ *//' -e 's/ *$//' | tr ' ' '\n' | tr '	' '\n' | sed -e 's/^/-Xlinker /' | tr '\n' ' ' | sed -e 's/-Xlinker[ 	]*-Xlinker/-Xlinker/g' -e 's/-Xlinker[ 	]*-Xlinker/-Xlinker/g' -e 's/-Xlinker *$//'`" -Xlinker -L/usr/local/lib"
