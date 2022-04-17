@@ -8,25 +8,13 @@ Make sure you have all the prerequisites installed (see below).  After that, you
 
 	git clone https://github.com/rhx/SwiftHelloGtk.git
 	cd SwiftHelloGtk
-    ./run-gir2swift.sh
     swift run
 	
-This will run the application.  A simple, empty 'Hello World' window should appear.  To exit the program, click the close button or press Control-C in the Terminal window.
-Please note that on macOS, due to a bug currently in the Swift Package Manager,
-you need to pass in the build flags manually, i.e. instead of `swift build` and `swift test` you can run
-
-    swift run `./run-gir2swift.sh flags -noUpdate`
-
 Alternatively, you can just build the program and run manually using
 
     swift build
 	.build/debug/HelloGtk
 
-Again, on macOS use
-
-    swift build `./run-gir2swift.sh flags -noUpdate`
-
-to ensure the correct compiler and linker flags are being passed in.
 On macOS you can also create an App bundle that you can move to your `/Applications` folder and double-click by running the following script:
 
 	./app-bundle.sh
@@ -72,21 +60,21 @@ was compiled against libraries built with earlier versions of `gir2swift`.
 
 ### Swift
 
-Building should work with at least Swift 5.2 (Swift 5.3 is required for `gtk4`). You can download Swift from https://swift.org/download/ -- if you are using macOS, make sure you have the command line tools installed as well (install them using `xcode-select --install`).  Test that your compiler works using `swift --version`, which should give you something like
+Building should work with at least Swift 5.6. You can download Swift from https://swift.org/download/ -- if you are using macOS, make sure you have the command line tools installed as well (install them using `xcode-select --install`).  Test that your compiler works using `swift --version`, which should give you something like
 
 	$ swift --version
-	Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
+    swift-driver version: 1.45.2 Apple Swift version 5.6 (swiftlang-5.6.0.323.62 clang-1316.0.20.8)
     Target: x86_64-apple-darwin20.3.0
 
 on macOS, or on Linux you should get something like:
 
 	$ swift --version
-	Swift version 5.3.2 (swift-5.3.2-RELEASE)
+	Swift version 5.6.1 (swift-5.6.1-RELEASE)
 	Target: x86_64-unknown-linux-gnu
 
 ### Gtk 3.22 or higher
 
-The Swift wrappers have been tested with glib-2.56, 2.58, 2.60, 2.62, 2.64, and 2.66, and gdk/gtk 3.22, 3.24, and 4.0 on the `gtk4` branch.  They should work with higher versions, but YMMV.  Also make sure you have `gobject-introspection` and its `.gir` files installed.
+The Swift wrappers have been tested with glib-2.56, 2.58, 2.60, 2.62, 2.64, 2.66, 2.68, 2.70 and 2.72, and gdk/gtk 3.22 and 3.24, as well as 4.0, 4.2, 4.4 and 4.6 on the `gtk4` branch.  They should work with higher versions, but YMMV.  Also make sure you have `gobject-introspection` and its `.gir` files installed.
 
 #### Linux
 
@@ -95,13 +83,6 @@ The Swift wrappers have been tested with glib-2.56, 2.58, 2.60, 2.62, 2.64, and 
 On Ubuntu 18.04 and 16.04 you can use the gtk that comes with the distribution.  Just install with the `apt` package manager:
 
 	sudo apt update
-	sudo apt install libgtk-3-dev gir1.2-gtksource-3.0 gobject-introspection libgirepository1.0-dev libxml2-dev
-
-If you prefer a newer version of gtk, you can also install it from the GNOME 3 Staging PPA (see https://launchpad.net/~gnome3-team/+archive/ubuntu/gnome3-staging), but be aware that this can be a bit dangerous (as this removes packages that can be vital, particularly if you use a GNOME-based desktop), so only do this if you know what you are doing:
-
-	sudo add-apt-repository ppa:gnome3-team/gnome3-staging
-	sudo apt update
-	sudo apt dist-upgrade
 	sudo apt install libgtk-3-dev gir1.2-gtksource-3.0 gobject-introspection libgirepository1.0-dev libxml2-dev
 
 ##### Fedora
@@ -134,10 +115,3 @@ this probably means that your Swift toolchain is too old.  Make sure the latest 
 
 	sudo xcode-select -s /Applications/Xcode.app
 	xcode-select --install
-
-### Known Issues
-
- * The new build system does not support directory paths with spaces (e.g. the `My Drive` directory used by Google Drive File Stream).
- * BUILD_DIR is not supported in the new build system.
- 
-As a workaround, you can use the old build scripts, e.g. `./build.sh` (instead of `run-gir2swift.sh` and `swift build`) to build a package.

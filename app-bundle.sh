@@ -4,6 +4,7 @@
 # be put into /Applications
 #
 . ./config.sh
+swift build -c release
 APP_DIR="${BUILT_PRODUCTS_DIR}/${FULL_PRODUCT_NAME}"
 wc=`pwd | wc -c`
 echo Bundling `echo "${APP_DIR}" | cut -c${wc}- | sed 's|^[^/]*/||'`

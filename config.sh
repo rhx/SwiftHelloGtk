@@ -18,7 +18,7 @@ if [ -z "$BUILD_DIR" ]; then
     export BUILD_DIR=`pwd`/.build
   fi
 fi
-BUILD_BIN=${BUILD_DIR}/debug
+BUILD_BIN=${BUILD_DIR}/release
 BUILT_PRODUCTS_DIR=${BUILD_DIR}/app
 export PACKAGES=.build/checkouts
 [ -e $PACKAGES ] || export PACKAGES=Packages
