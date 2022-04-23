@@ -9,7 +9,7 @@ let package = Package(
         .package(url: "https://github.com/rhx/SwiftGtk.git",  branch: "gtk4-development"),
     ],
     targets: [
-        .target(name: "HelloGtk", dependencies: [
+        .executableTarget(name: "HelloGtk", dependencies: [
             .product(name: "Gtk", package: "SwiftGtk")
         ]),
     ]
