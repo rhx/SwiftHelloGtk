@@ -5,8 +5,7 @@ import PackageDescription
 let package = Package(
     name: "HelloGtk",
     dependencies: [
-        .package(url: "https://github.com/rhx/gir2swift.git", branch: "development"),
-        .package(url: "https://github.com/rhx/SwiftGtk.git",  branch: "gtk4-development"),
+        .package(url: "https://github.com/rhx/SwiftGtk.git",  branch: "gtk4-monorepo"),
     ],
     targets: [
         .executableTarget(name: "HelloGtk", dependencies: [
