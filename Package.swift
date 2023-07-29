@@ -6,7 +6,7 @@ let package = Package(
     name: "HelloGtk",
     dependencies: [
         .package(url: "https://github.com/rhx/gir2swift.git", branch: "development"),
-        .package(url: "https://github.com/rhx/SwiftGtk.git",  branch: "development"),
+        .package(url: "https://github.com/rhx/SwiftGtk.git",  branch: "monorepo-development"),
     ],
     targets: [
         .target(name: "HelloGtk", dependencies: [

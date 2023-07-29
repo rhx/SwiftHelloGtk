@@ -48,7 +48,7 @@ underlying types or pointers.
 This means that a lot of the changes will be source-breaking for code that
 was compiled against libraries built with earlier versions of `gir2swift`.
 
- * Requires Swift 5.2 or later (Swift 5.3 is required for the `gtk4` branch)
+ * Requires Swift 5.6 or later
  * Wrapper code is now `@inlinable` to enable the compiler to optimise away most of the wrappers
  * Parameters and return types use more idiomatic Swift (e.g. `Ref` wrappers instead of pointers, `Int` instead of `gint`, etc.)
  * Functions that take or return records now are templated instead of using the type-erased Protocol
@@ -63,13 +63,13 @@ was compiled against libraries built with earlier versions of `gir2swift`.
 Building should work with at least Swift 5.6. You can download Swift from https://swift.org/download/ -- if you are using macOS, make sure you have the command line tools installed as well (install them using `xcode-select --install`).  Test that your compiler works using `swift --version`, which should give you something like
 
 	$ swift --version
-    swift-driver version: 1.45.2 Apple Swift version 5.6 (swiftlang-5.6.0.323.62 clang-1316.0.20.8)
-    Target: x86_64-apple-darwin20.3.0
+	swift-driver version: 1.75.2 Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)
+    Target: arm64-apple-macosx13.0
 
 on macOS, or on Linux you should get something like:
 
 	$ swift --version
-	Swift version 5.6.1 (swift-5.6.1-RELEASE)
+	Swift version 5.8.1 (swift-5.8.1-RELEASE)
 	Target: x86_64-unknown-linux-gnu
 
 ### Gtk 3.22 or higher
