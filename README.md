@@ -2,26 +2,31 @@
 
 A simple 'hello-world' app using SwiftGtk
 
+<<<<<<< HEAD
 ![macOS 11 build](https://github.com/rhx/SwiftHelloGtk/workflows/macOS%2011/badge.svg)
 ![macOS 10.15 build](https://github.com/rhx/SwiftHelloGtk/workflows/macOS%2010.15/badge.svg)
 ![macOS gtk4 build](https://github.com/rhx/SwiftHelloGtk/workflows/macOS%20gtk4/badge.svg)
 ![Ubuntu 20.04 build](https://github.com/rhx/SwiftHelloGtk/workflows/Ubuntu%2020.04/badge.svg)
 ![Ubuntu 18.04 build](https://github.com/rhx/SwiftHelloGtk/workflows/Ubuntu%2018.04/badge.svg)
 
-## Building
+## Building and Running
 
 Make sure you have all the prerequisites installed (see below).  After that, you can simply clone this repository and build the command line executable (be patient, this will download all the required dependencies and take a while to compile) using
 
 	git clone https://github.com/rhx/SwiftHelloGtk.git
 	cd SwiftHelloGtk
-    ./run-gir2swift.sh
-	swift build
+    swift run
+	
+Alternatively, you can just build the program and run manually using
 
-You can run the program using
+    swift build
+	.build/debug/HelloGtk
 
-	swift run
+On macOS you can also create an App bundle that you can move to your `/Applications` folder and double-click by running the following script:
 
-A simple, empty 'Hello World' window should appear.  To exit the program, click the close button or press Control-C in the Terminal window.
+	./app-bundle.sh
+
+This will create a `HelloGtk.app` inside the `.build/app/` folder.
 
 ### macOS
 
@@ -39,7 +44,6 @@ Under macOS, you can also create an Application bundle that you can copy to the 
 
 On macOS, you can build the project using Xcode instead.  To do this, you need to create an Xcode project first, then open the project in the Xcode IDE:
 
-
 	./xcodegen.sh
 	open HelloGtk.xcodeproj
 
@@ -51,6 +55,8 @@ After that, select the executable target (not the Bundle/Framework target with t
 
 There now is a `gtk4` branch supporting the latest version of gtk.
 
+The current version introduces a new build system and signal generation code contributed by Mikoláš Stuchlík (see the **Building and Running** Section above).
+
 ### Other notable changes
 
 Version 11 introduces a new type system into `gir2swift`,
@@ -61,7 +67,7 @@ underlying types or pointers.
 This means that a lot of the changes will be source-breaking for code that
 was compiled against libraries built with earlier versions of `gir2swift`.
 
- * Requires Swift 5.2 or later (Swift 5.3 is required for the `gtk4` branch)
+ * Requires Swift 5.6 or later
  * Wrapper code is now `@inlinable` to enable the compiler to optimise away most of the wrappers
  * Parameters and return types use more idiomatic Swift (e.g. `Ref` wrappers instead of pointers, `Int` instead of `gint`, etc.)
  * Functions that take or return records now are templated instead of using the type-erased Protocol
@@ -73,21 +79,21 @@ was compiled against libraries built with earlier versions of `gir2swift`.
 
 ### Swift
 
-Building should work with at least Swift 5.2 (Swift 5.3 is required for `gtk4`). You can download Swift from https://swift.org/download/ -- if you are using macOS, make sure you have the command line tools installed as well (install them using `xcode-select --install`).  Test that your compiler works using `swift --version`, which should give you something like
+Building should work with at least Swift 5.6. You can download Swift from https://swift.org/download/ -- if you are using macOS, make sure you have the command line tools installed as well (install them using `xcode-select --install`).  Test that your compiler works using `swift --version`, which should give you something like
 
 	$ swift --version
-	Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
-    Target: x86_64-apple-darwin20.3.0
+	swift-driver version: 1.75.2 Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)
+    Target: arm64-apple-macosx13.0
 
 on macOS, or on Linux you should get something like:
 
 	$ swift --version
-	Swift version 5.3.2 (swift-5.3.2-RELEASE)
+	Swift version 5.8.1 (swift-5.8.1-RELEASE)
 	Target: x86_64-unknown-linux-gnu
 
 ### Gtk 3.22 or higher
 
-The Swift wrappers have been tested with glib-2.56, 2.58, 2.60, 2.62, 2.64 and 2.66, and gdk/gtk 3.22, 3.24, and 4.0 on the `gtk4` branch.  They should work with higher versions, but YMMV.  Also make sure you have `gobject-introspection` and its `.gir` files installed.
+The Swift wrappers have been tested with glib-2.56, 2.58, 2.60, 2.62, 2.64, 2.66, 2.68, 2.70 and 2.72, and gdk/gtk 3.22 and 3.24, as well as 4.0, 4.2, 4.4 and 4.6 on the `gtk4` branch.  They should work with higher versions, but YMMV.  Also make sure you have `gobject-introspection` and its `.gir` files installed.
 
 #### Linux
 
@@ -111,11 +117,12 @@ On macOS, you can install gtk using HomeBrew (for setup instructions, see http:/
 	brew update
 	brew install gtk+3 glib glib-networking gobject-introspection pkg-config
 
-
 ## Troubleshooting
+
 Here are some common errors you might encounter and how to fix them.
 
 ### Old Swift toolchain or Xcode
+
 If you get an error such as
 
 	$ ./build.sh 
@@ -127,12 +134,3 @@ this probably means that your Swift toolchain is too old.  Make sure the latest 
 
 	sudo xcode-select -s /Applications/Xcode.app
 	xcode-select --install
-
-### Known Issues
-
- * When building, a lot of warnings appear.  This is largely an issue with automatic `RawRepresentable` conformance in the Swift Standard library.  As a workaround, you can turn this off by passing the `-Xswiftc -suppress-warnings` parameter when building.
- 
- * The current build system does not support directory paths with spaces (e.g. the `My Drive` directory used by Google Drive File Stream).
- * BUILD_DIR is not supported in the current build system.
- 
-As a workaround, you can use the old build scripts, e.g. `./build.sh` (instead of `run-gir2swift.sh` and `swift build`) to build a package.
