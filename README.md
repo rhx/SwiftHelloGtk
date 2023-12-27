@@ -3,7 +3,7 @@
 A simple 'hello-world' app using SwiftGtk
 
 ## Building and Running
-=======
+
 ![macOS 11 build](https://github.com/rhx/SwiftHelloGtk/workflows/macOS%2011/badge.svg)
 ![macOS 10.15 build](https://github.com/rhx/SwiftHelloGtk/workflows/macOS%2010.15/badge.svg)
 ![macOS gtk4 build](https://github.com/rhx/SwiftHelloGtk/workflows/macOS%20gtk4/badge.svg)
