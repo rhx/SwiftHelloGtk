@@ -34,9 +34,8 @@ After that, select the executable target (not the Bundle/Framework target with t
 
 ### Support for gtk 4.x
 
-There now is a `gtk4` branch supporting the latest version of gtk.
-
-The current version introduces a new build system and signal generation code contributed by Mikoláš Stuchlík (see the **Building and Running** Section above).
+There now are `gtk4` and `gtk4-monorepo` branches,
+supporting the latest version of gtk.
 
 ### Other notable changes
 
@@ -63,40 +62,44 @@ was compiled against libraries built with earlier versions of `gir2swift`.
 Building should work with at least Swift 5.6. You can download Swift from https://swift.org/download/ -- if you are using macOS, make sure you have the command line tools installed as well (install them using `xcode-select --install`).  Test that your compiler works using `swift --version`, which should give you something like
 
 	$ swift --version
-    swift-driver version: 1.45.2 Apple Swift version 5.6 (swiftlang-5.6.0.323.62 clang-1316.0.20.8)
-    Target: x86_64-apple-darwin20.3.0
+    swift-driver version: 1.87.3 Apple Swift version 5.9.2 (swiftlang-5.9.2.2.56 clang-1500.1.0.2.5)
+    Target: arm64-apple-macosx14.0
 
 on macOS, or on Linux you should get something like:
 
 	$ swift --version
-	Swift version 5.6.1 (swift-5.6.1-RELEASE)
+	Swift version 5.9.2 (swift-5.9.2-RELEASE)
 	Target: x86_64-unknown-linux-gnu
 
 ### Gtk 3.22 or higher
 
-The Swift wrappers have been tested with glib-2.56, 2.58, 2.60, 2.62, 2.64, 2.66, 2.68, 2.70 and 2.72, and gdk/gtk 3.22 and 3.24, as well as 4.0, 4.2, 4.4 and 4.6 on the `gtk4` branch.  They should work with higher versions, but YMMV.  Also make sure you have `gobject-introspection` and its `.gir` files installed.
+The Swift wrappers have been tested with
+glib-2.56, 2.58, 2.60, 2.62, 2.64, 2.66, 2.68, 2.70, 2.72, 2.74, 2.76 and 2.78,
+and gdk/gtk-3.22 and 3.24, as well as 4.0, 4.2, 4.4, 4.6, 4.8, 4.10 and 4.12
+on the `gtk4` branch.  They should work with higher versions, but YMMV.
+Also make sure you have `gobject-introspection` and its `.gir` files installed.
 
 #### Linux
 
 ##### Ubuntu
 
-On Ubuntu 18.04 and 16.04 you can use the gtk that comes with the distribution.  Just install with the `apt` package manager:
+On Ubuntu 22.04, you can use the gtk that comes with the distribution.  Just install with the `apt` package manager:
 
-	sudo apt update
-	sudo apt install libgtk-3-dev gir1.2-gtksource-3.0 gobject-introspection libgirepository1.0-dev libxml2-dev
+        sudo apt update
+        sudo apt install libgtk-4-dev gir1.2-gtksource-4.0 libcogl-pango-dev libcogl-path-dev libcogl-dev libpango1.0-dev gir1.2-pango-1.0 libgdk-pixbuf2.0-dev gir1.2-gdkpixbuf-2.0 libgraphene-1.0-dev gir1.2-graphene-1.0 libglib2.0-dev glib-networking libatk1.0-dev libatk-bridge2.0-dev libcogl-dev libcogl-pango-dev gobject-introspection libgirepository1.0-dev libxml2-dev jq
 
 ##### Fedora
 
 On Fedora 29, you can use the gtk that comes with the distribution.  Just install with the `dnf` package manager:
 
-	sudo dnf install gtk3-devel pango-devel cairo-devel cairo-gobject-devel glib2-devel gobject-introspection-devel libxml2-devel
+    sudo dnf install gtk4-devel pango-devel cairo-devel cairo-gobject-devel glib2-devel gobject-introspection-devel libxml2-devel jq
 
 #### macOS
 
 On macOS, you can install gtk using HomeBrew (for setup instructions, see http://brew.sh).  Once you have a running HomeBrew installation, you can use it to install a native version of gtk:
 
 	brew update
-	brew install gtk+3 glib glib-networking gobject-introspection pkg-config
+    brew install gtk4 glib glib-networking gobject-introspection pkg-config jq
 
 ## Troubleshooting
 
