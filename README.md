@@ -2,6 +2,8 @@
 
 A simple 'hello-world' app using SwiftGtk
 
+## Building and Running
+=======
 ![macOS 11 build](https://github.com/rhx/SwiftHelloGtk/workflows/macOS%2011/badge.svg)
 ![macOS 10.15 build](https://github.com/rhx/SwiftHelloGtk/workflows/macOS%2010.15/badge.svg)
 ![macOS gtk4 build](https://github.com/rhx/SwiftHelloGtk/workflows/macOS%20gtk4/badge.svg)
@@ -14,14 +16,18 @@ Make sure you have all the prerequisites installed (see below).  After that, you
 
 	git clone https://github.com/rhx/SwiftHelloGtk.git
 	cd SwiftHelloGtk
-    ./run-gir2swift.sh
-	swift build
+    swift run
+	
+Alternatively, you can just build the program and run manually using
 
-You can run the program using
+    swift build
+	.build/debug/HelloGtk
 
-	swift run
+On macOS you can also create an App bundle that you can move to your `/Applications` folder and double-click by running the following script:
 
-A simple, empty 'Hello World' window should appear.  To exit the program, click the close button or press Control-C in the Terminal window.
+	./app-bundle.sh
+
+This will create a `HelloGtk.app` inside the `.build/app/` folder.
 
 ### macOS
 
@@ -39,7 +45,6 @@ Under macOS, you can also create an Application bundle that you can copy to the 
 
 On macOS, you can build the project using Xcode instead.  To do this, you need to create an Xcode project first, then open the project in the Xcode IDE:
 
-
 	./xcodegen.sh
 	open HelloGtk.xcodeproj
 
@@ -49,7 +54,8 @@ After that, select the executable target (not the Bundle/Framework target with t
 
 ### Support for gtk 4.x
 
-There now is a `gtk4` branch supporting the latest version of gtk.
+There now are `gtk4` and `gtk4-monorepo` branches,
+supporting the latest version of gtk.
 
 ### Other notable changes
 
@@ -73,49 +79,54 @@ was compiled against libraries built with earlier versions of `gir2swift`.
 
 ### Swift
 
-Building should work with at least Swift 5.2 (Swift 5.3 is required for `gtk4`). You can download Swift from https://swift.org/download/ -- if you are using macOS, make sure you have the command line tools installed as well (install them using `xcode-select --install`).  Test that your compiler works using `swift --version`, which should give you something like
+Building should work with at least Swift 5.6. You can download Swift from https://swift.org/download/ -- if you are using macOS, make sure you have the command line tools installed as well (install them using `xcode-select --install`).  Test that your compiler works using `swift --version`, which should give you something like
 
 	$ swift --version
-	Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
-    Target: x86_64-apple-darwin20.3.0
+    swift-driver version: 1.87.3 Apple Swift version 5.9.2 (swiftlang-5.9.2.2.56 clang-1500.1.0.2.5)
+    Target: arm64-apple-macosx14.0
 
 on macOS, or on Linux you should get something like:
 
 	$ swift --version
-	Swift version 5.3.2 (swift-5.3.2-RELEASE)
+	Swift version 5.9.2 (swift-5.9.2-RELEASE)
 	Target: x86_64-unknown-linux-gnu
 
 ### Gtk 3.22 or higher
 
-The Swift wrappers have been tested with glib-2.56, 2.58, 2.60, 2.62, 2.64 and 2.66, and gdk/gtk 3.22, 3.24, and 4.0 on the `gtk4` branch.  They should work with higher versions, but YMMV.  Also make sure you have `gobject-introspection` and its `.gir` files installed.
+The Swift wrappers have been tested with
+glib-2.56, 2.58, 2.60, 2.62, 2.64, 2.66, 2.68, 2.70, 2.72, 2.74, 2.76 and 2.78,
+and gdk/gtk-3.22 and 3.24, as well as 4.0, 4.2, 4.4, 4.6, 4.8, 4.10 and 4.12
+on the `gtk4` branch.  They should work with higher versions, but YMMV.
+Also make sure you have `gobject-introspection` and its `.gir` files installed.
 
 #### Linux
 
 ##### Ubuntu
 
-On Ubuntu 18.04 and 16.04 you can use the gtk that comes with the distribution.  Just install with the `apt` package manager:
+On Ubuntu 22.04, you can use the gtk that comes with the distribution.  Just install with the `apt` package manager:
 
-	sudo apt update
-	sudo apt install libgtk-3-dev gir1.2-gtksource-3.0 gobject-introspection libgirepository1.0-dev libxml2-dev
+        sudo apt update
+        sudo apt install libgtk-4-dev gir1.2-gtksource-4.0 libcogl-pango-dev libcogl-path-dev libcogl-dev libpango1.0-dev gir1.2-pango-1.0 libgdk-pixbuf2.0-dev gir1.2-gdkpixbuf-2.0 libgraphene-1.0-dev gir1.2-graphene-1.0 libglib2.0-dev glib-networking libatk1.0-dev libatk-bridge2.0-dev libcogl-dev libcogl-pango-dev gobject-introspection libgirepository1.0-dev libxml2-dev jq
 
 ##### Fedora
 
 On Fedora 29, you can use the gtk that comes with the distribution.  Just install with the `dnf` package manager:
 
-	sudo dnf install gtk3-devel pango-devel cairo-devel cairo-gobject-devel glib2-devel gobject-introspection-devel libxml2-devel
+    sudo dnf install gtk4-devel pango-devel cairo-devel cairo-gobject-devel glib2-devel gobject-introspection-devel libxml2-devel jq
 
 #### macOS
 
 On macOS, you can install gtk using HomeBrew (for setup instructions, see http://brew.sh).  Once you have a running HomeBrew installation, you can use it to install a native version of gtk:
 
 	brew update
-	brew install gtk+3 glib glib-networking gobject-introspection pkg-config
-
+    brew install gtk4 glib glib-networking gobject-introspection pkg-config jq
 
 ## Troubleshooting
+
 Here are some common errors you might encounter and how to fix them.
 
 ### Old Swift toolchain or Xcode
+
 If you get an error such as
 
 	$ ./build.sh 
@@ -136,3 +147,4 @@ this probably means that your Swift toolchain is too old.  Make sure the latest 
  * BUILD_DIR is not supported in the current build system.
  
 As a workaround, you can use the old build scripts, e.g. `./build.sh` (instead of `run-gir2swift.sh` and `swift build`) to build a package.
+>>>>>>> a056c93 (Add new build system)
