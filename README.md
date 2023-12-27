@@ -147,4 +147,3 @@ this probably means that your Swift toolchain is too old.  Make sure the latest 
  * BUILD_DIR is not supported in the current build system.
  
 As a workaround, you can use the old build scripts, e.g. `./build.sh` (instead of `run-gir2swift.sh` and `swift build`) to build a package.
->>>>>>> a056c93 (Add new build system)
