@@ -6,7 +6,7 @@ let status = Application.run(startupHandler: nil) { app in
     window.setDefaultSize(width: 160, height: 80)
     let label = LabelRef(str: "Hello, SwiftGtk")
     window.set(child: label)
-    window.show()
+    window.set(visible: true)
 }
 
 guard let status = status else {
